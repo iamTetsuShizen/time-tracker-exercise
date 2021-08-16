@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Http\Controllers\TaskController;
+use App\Repositories\TaskRepository;
+use App\Repositories\EloquentTaskRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,10 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->when(ApiController::class)
-                  ->needs(ItemRepository::class)
+        $this->app->when(TaskController::class)
+                  ->needs(TaskRepository::class)
                   ->give(function () {
-                      return new EloquentItemRepository();
+                      return new EloquentTaskRepository();
                   });
     }
 

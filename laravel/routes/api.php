@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('tasks/', '\App\Http\Controllers\TaskController@getTasks')->name('get-tasks');
+
+Route::post('task/store', '\App\Http\Controllers\TaskController@store')->name('store-task');
+Route::delete('task/delete/{taskID}', '\App\Http\Controllers\TaskController@delete')->name('delete-task');
+
