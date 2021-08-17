@@ -90,7 +90,12 @@ Prerquisites needed for this project:
    ```sh
    npm run dev
    ```
-
+   
+7. The app will be already running on your localhost
+   ```sh
+   http://localhost/
+   ```
+   
 <!-- USAGE EXAMPLES -->
 ## Usage
 
