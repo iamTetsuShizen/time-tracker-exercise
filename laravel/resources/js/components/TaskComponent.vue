@@ -1,19 +1,16 @@
 <template>
-    <div class="container-fluid">
+    <div class="task-meter container-fluid">
         <div class="row">
-            <div class="col-8">
-                <div class="">
-                    <label for="task-description">Task description:</label>
-                    <input id="task-description" v-model="taskDescription" type="text" />
-                </div>
-                <div>
-                    <button v-on:click="startTask" :disabled="inProgress">Start task</button>
-                    <button v-on:click="storeTask" :disabled="!inProgress">Finish task</button>
+            <div class="col-sm-12 px-0">
+                <div class="d-flex justify-content-between">
+                    <input class="task-meter__input" v-model="taskDescription" type="text" placeholder="What are you working on?"/>
+                    <label class="task-meter__time">{{hours}} : {{minutes}} : {{seconds}}</label>
                 </div>
             </div>
-            <div class="col-4">
-                <div>
-                    <label>{{hours}} : {{minutes}} : {{seconds}}</label>
+            <div class="col-sm-12 px-0">
+                <div class="task-meter__buttons">
+                    <button v-on:click="startTask" :disabled="inProgress" class="btn btn-primary">Start</button>
+                    <button v-on:click="storeTask" :disabled="!inProgress" class="btn btn-success">Finish</button>
                 </div>
             </div>
         </div>
