@@ -17,38 +17,33 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#next-iterations">Next iterations</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+First of all, I would like to explain my tought process on this project and the decisions that I made:
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+* At first of receiving the test, I went overboard trying to implement a Symfony project with Hexagonal architecture, however this idea was scrapped after seeing the implications of implementing such an entire infraestructure for a simple application.
+* I started digging arround Laravel, wich is the framework i have more knowledge about, and stumbled upon Sail, a fast, reliable way to create a Laravel project with a little Docker network containing a MySQL database and other features like a mail server, a redis container for caching and a health check for all the mentioned.
+* After implementing a new Laravel project with Sail commands, I wanted to get the approach of a Web sending their needs to a little API that has connection with the database, so even the Web on future interactions could be another project on itself, which I personally think it's great for teamwork as they permit to be working on different workspaces.
+* On the Front-end side, I wanted something more modern than just using laravel blade, so I installed Vue on the project so I can work component wise, and right now Laravel couples with Vue perfectly due the easiness to install it inside a Laravel project and the documentation behind it.
+* Coding-wise, I feel like I could do a better job with a little more time (I will specify things I would like to have done in Next iterations), but it's my fault for getting carried away the first 3 days.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
 * [Laravel](https://laravel.com)
+* [Sail](https://github.com/laravel/sail)
+* [Vue](https://vuejs.org/)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
@@ -59,26 +54,50 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
+* php (if using Windows, Linux newest distros comes already with PHP 7.4+ installed)
+
+
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/iamTetsuShizen/time-tracker-exercise.git
    ```
-3. Install NPM packages
+2. Access inside /laravel folder
+3. Copy the .env.example as .env
+    ```sh
+    mv .env.example .env
+    ```
+4. Set up the docker
+    ```sh
+    ./vendor/bin/sail up
+    ```
+    Note: you can also add the *-d* flag to start the container deatatched to the console
+5. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
+6. Run a first transpilation of all the assets into the public folder
+   ```sh
+   npm run dev
    ```
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+At the top of your screen you will have the task form, fill the input and then press **Start**, the timer will start and will not stop untill you click **Finish**.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+After clicking the finish button, the backend stores the task and time spent, and updates the task list on the application.
+
+Of that task list, you can check the times spent, and also delete tasks.
+
+
+<!-- NEXT ITERATIONS -->
+## Next iterations
+
+Here I have a list of all the things, and necessities I came up that hasn't been implemented on the project:
+* Empty task description input error gives null to the backend, therefore resulting on an error, that could be sent back in form of a custom Exception on a popup or below or avobe the component.
+* Namings: I've left the common names for fear of some configuration on sail stopped working.
+* CSS architecture: the styles are pretty simple, and they follow the BEM naming convention for better nesting, but it could be separated into critical CSS and non-critical css as the project iterates more, so the Web is more SEO friendly, also it can be organized as the 7-1 pattern describes (https://sass-guidelin.es/#architecture)
+* More SOLID: right now the calculus for hours, minutes, and seconds are repeated over the two components that shows the time on our Web, this results in a not DRY approach, I would encapsulate that functionality into a new component and then be called by whoever needs a time related calculus.
+* Testing: As the code base gets bigger and bigger, I feel like testing has to be crucial for the maintanability of the application, in form of unit testing and integration testing.
