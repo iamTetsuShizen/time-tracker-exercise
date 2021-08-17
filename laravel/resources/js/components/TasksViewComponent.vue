@@ -1,8 +1,14 @@
 <template>
     <div class="container">
-        <div class="col-12 ">
-           <div v-for="task in tasks" :key="task.id">
-               <p>{{task.description}} <span>{{format(task.time_spent)}}</span><button class="btn btn-danger" v-on:click="deleteTask(task.id)">Delete</button></p>
+        <div class="col-12 px-0">
+           <div v-for="task in tasks" :key="task.id" class="d-flex justify-content-between task-info">
+               <div>
+                   <p class="task-info__description mb-0">{{task.description}}</p>
+                   <p class="task-info__time-spent mb-0">{{format(task.time_spent)}}</p>
+                </div>
+                <div>
+                    <button class="btn btn-danger" v-on:click="deleteTask(task.id)">Delete</button>
+                </div>
            </div>
         </div>
     </div>

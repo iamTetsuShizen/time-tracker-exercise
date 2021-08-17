@@ -10002,3 +10002,31 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.task-meter {
+  margin: 10px 0;
+}
+.task-meter__input {
+  flex-grow: 2;
+  margin-right: 20px;
+  font-size: 16px;
+}
+.task-meter__time {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+.task-meter__buttons {
+  margin-top: 5px;
+}
+
+.task-info {
+  border-bottom: 1px solid #333333;
+  margin-bottom: 5px;
+}
+.task-info__description {
+  font-size: 18px;
+  font-weight: 700;
+}
+.task-info__time-spent {
+  font-weight: 300;
+}

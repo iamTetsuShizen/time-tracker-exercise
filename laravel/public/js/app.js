@@ -1881,9 +1881,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TaskComponent',
@@ -1991,6 +1988,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _EventBus_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EventBus.vue */ "./resources/js/EventBus.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37799,14 +37802,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" }, [
+  return _c("div", { staticClass: "task-meter container-fluid" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-8" }, [
-        _c("div", {}, [
-          _c("label", { attrs: { for: "task-description" } }, [
-            _vm._v("Task description:")
-          ]),
-          _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12 px-0" }, [
+        _c("div", { staticClass: "d-flex justify-content-between" }, [
           _c("input", {
             directives: [
               {
@@ -37816,7 +37815,8 @@ var render = function() {
                 expression: "taskDescription"
               }
             ],
-            attrs: { id: "task-description", type: "text" },
+            staticClass: "task-meter__input",
+            attrs: { type: "text", placeholder: "What are you working on?" },
             domProps: { value: _vm.taskDescription },
             on: {
               input: function($event) {
@@ -37826,33 +37826,9 @@ var render = function() {
                 _vm.taskDescription = $event.target.value
               }
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c(
-            "button",
-            {
-              attrs: { disabled: _vm.inProgress },
-              on: { click: _vm.startTask }
-            },
-            [_vm._v("Start task")]
-          ),
+          }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              attrs: { disabled: !_vm.inProgress },
-              on: { click: _vm.storeTask }
-            },
-            [_vm._v("Finish task")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
-        _c("div", [
-          _c("label", [
+          _c("label", { staticClass: "task-meter__time" }, [
             _vm._v(
               _vm._s(_vm.hours) +
                 " : " +
@@ -37861,6 +37837,30 @@ var render = function() {
                 _vm._s(_vm.seconds)
             )
           ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-12 px-0" }, [
+        _c("div", { staticClass: "task-meter__buttons" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { disabled: _vm.inProgress },
+              on: { click: _vm.startTask }
+            },
+            [_vm._v("Start")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              attrs: { disabled: !_vm.inProgress },
+              on: { click: _vm.storeTask }
+            },
+            [_vm._v("Finish")]
+          )
         ])
       ])
     ])
@@ -37923,26 +37923,41 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c(
       "div",
-      { staticClass: "col-12 " },
+      { staticClass: "col-12 px-0" },
       _vm._l(_vm.tasks, function(task) {
-        return _c("div", { key: task.id }, [
-          _c("p", [
-            _vm._v(_vm._s(task.description) + " "),
-            _c("span", [_vm._v(_vm._s(_vm.format(task.time_spent)))]),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                on: {
-                  click: function($event) {
-                    return _vm.deleteTask(task.id)
+        return _c(
+          "div",
+          {
+            key: task.id,
+            staticClass: "d-flex justify-content-between task-info"
+          },
+          [
+            _c("div", [
+              _c("p", { staticClass: "task-info__description mb-0" }, [
+                _vm._v(_vm._s(task.description))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "task-info__time-spent mb-0" }, [
+                _vm._v(_vm._s(_vm.format(task.time_spent)))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteTask(task.id)
+                    }
                   }
-                }
-              },
-              [_vm._v("Delete")]
-            )
-          ])
-        ])
+                },
+                [_vm._v("Delete")]
+              )
+            ])
+          ]
+        )
       }),
       0
     )
